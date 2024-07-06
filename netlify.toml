@@ -2,6 +2,4 @@
 package = "@netlify/plugin-nextjs"
 
 [[redirects]]
-  from = "/*"
-  to = "/"
-  status = 302
+/* /index.html 200
