@@ -35,10 +35,10 @@ export default function Home() {
     event.preventDefault();
     const formData = new FormData(event.currentTarget as HTMLFormElement);
     if (formData) {
-      const userName = formData.get("UserName") as string;
+      const userEmail = formData.get("userEmail") as string;
       const password = formData.get("Password") as string;
       const bodyData: User = {
-        userName,
+        userEmail,
         password,
       };
       await dispatch(login(bodyData));
@@ -50,6 +50,7 @@ export default function Home() {
     reason?: string
   ) => {
     if (reason === "clickaway") {
+      setOpen(false);
       return;
     }
     setOpen(false);
@@ -85,10 +86,10 @@ export default function Home() {
             </Typography>
             <TextField
               sx={{ minWidth: "100% " }}
-              name="UserName"
-              label="UserName"
+              name="userEmail"
+              label="userEmail"
               variant="filled"
-              type="username"
+              type="email"
               size="medium"
               required
               inputProps={{ style: { fontSize: "1.3rem" } }}

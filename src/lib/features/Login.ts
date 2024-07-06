@@ -1,9 +1,6 @@
 import { createAppSlice } from "@/lib/createAppSlice";
-import type { User, UserResponse } from "@/types/Login";
-interface Login {
-  user: UserResponse | null;
-  status: "rejected" | "accepted" | "pending" | null;
-}
+import type { User } from "@/types/Login";
+import type { Login } from "@/types/Login";
 
 function setLocalStorageItem(key: string, value: object) {
   if (typeof window !== "undefined") {
@@ -46,7 +43,7 @@ export const AuthSlide = createAppSlice({
     login: create.asyncThunk(
       async (query: User, dispatch) => {
         const searchParams = new URLSearchParams();
-        searchParams.append("username", query.userName);
+        searchParams.append("userEmail", query.userEmail);
         searchParams.append("password", query.password);
 
         const response = await fetch("/api/users?" + searchParams);
@@ -71,11 +68,9 @@ export const AuthSlide = createAppSlice({
       }
     ),
   }),
-  // You can define your selectors here. These selectors receive the slice
-  // state as their first argument.
+
 });
 
-// Action creators are generated for each case reducer function.
 export const { login ,logOut} = AuthSlide.actions;
 
-// Selectors returned by `slice.selectors` take the root state as their first argument.
+

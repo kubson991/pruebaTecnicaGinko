@@ -7,32 +7,9 @@ import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import { Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from "@mui/material";
 import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const Orders = () => {
-  const router = useRouter();
-  const dispatch = useAppDispatch();
-  const orders = useAppSelector((state) => state.Orders.orders);
-  const user = useAppSelector((state) => state.AuthUser.user);
-  const [dialogOpen, setDialogOpen] = useState<boolean>(false)
-  const [rowIdActive, setRowIdActive] = useState<string>('')
-
-  function handleClose() {
-    setDialogOpen(false)
-    setRowIdActive('')
-  }
-  async function handleRemoveElement(data: any) {
-    setRowIdActive(data.id)
-    setDialogOpen(true)
-  }
-async function removeElementByFetch() {
-  if (user) {
-    await dispatch(deleteOrder({user,orderId:rowIdActive}))
-  }
-  setDialogOpen(false)
-  setRowIdActive('')
-}
   const columns: GridColDef[] = [
     {
       field: "id",
@@ -139,6 +116,12 @@ async function removeElementByFetch() {
     },
   ];
 
+  const dispatch = useAppDispatch();
+  const orders = useAppSelector((state) => state.Orders.orders);
+  const user = useAppSelector((state) => state.AuthUser.user);
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false)
+  const [rowIdActive, setRowIdActive] = useState<string>('')
+
   useEffect(() => {
     async function fetchOrders() {
       if (user) {
@@ -147,6 +130,25 @@ async function removeElementByFetch() {
     }
     fetchOrders();
   }, []);
+
+  function handleClose() {
+    setDialogOpen(false)
+    setRowIdActive('')
+  }
+  async function handleRemoveElement(data: any) {
+    setRowIdActive(data.id)
+    setDialogOpen(true)
+  }
+  async function removeElementByFetch() {
+  if (user) {
+    await dispatch(deleteOrder({user,orderId:rowIdActive}))
+  }
+  setDialogOpen(false)
+  setRowIdActive('')
+  }
+
+
+
 
   return (
     <>
@@ -191,7 +193,7 @@ async function removeElementByFetch() {
            Delete
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description" variant="h5" component="h4" textAlign="center" gutterBottom>
+          <DialogContentText id="alert-dialog-description" variant="h5" component="h5" textAlign="center" gutterBottom>
             Are you sure of deleting this order?
           </DialogContentText>
         </DialogContent>

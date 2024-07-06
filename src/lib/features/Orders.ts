@@ -1,30 +1,15 @@
 import { createAppSlice } from "@/lib/createAppSlice";
 import { UserResponse } from "@/types/Login";
-import type { Order } from "@/types/Orders";
-import Layout from "@/components/Layout";
-
- interface OrderSlide {
-  orders:Order[],
-  status:'rejected'|'accepted'|'pending'|null
-}
- interface deleteOrderPayload {
-  user:UserResponse,
-  orderId:string
-}
+import type { deleteOrderPayload , OrderSlide } from "@/types/Orders";
 
 const initialState: OrderSlide = {
   orders:[],
   status:null
 };
 
-
-
-// If you are not using async thunks you can use the standalone `createSlice`.
 export const OrdersSlide = createAppSlice({
   name: "Orders",
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
-  // The `reducers` field lets us define reducers and generate associated actions
   reducers: (create) => ({
     getOrders: create.asyncThunk(
       async (user:UserResponse,dispatch) => {

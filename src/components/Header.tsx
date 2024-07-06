@@ -3,6 +3,7 @@ import { useAppDispatch } from "@/lib/hooks";
 import type { UserResponse } from "@/types/Login";
 import { Avatar, Box, Button, Stack, Typography } from "@mui/material";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Header({user}:{user:UserResponse|null}) {
   const dispatch=useAppDispatch()
