@@ -1,43 +1,27 @@
-
 import data from '@/data/orders.json';
+import { Order } from '@/types/Orders';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-interface Order {
-    id: number;
-    date: string;
-    name: string;
-    shipTo: string;
-    paymentMethod: string;
-    saleAmount: string;
+let orders: Order[] = data.orders;
+
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { method, query: { order_id }, query: { token } } = req;
+
+  if (token !== 'xd') {
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
-const orders:Order[]= data.orders;
+  switch (method) {
+    case 'GET':
+      return res.status(200).json({ orders });
 
-export default async function handler(req:NextApiRequest, res:NextApiResponse) {
-  const username=req.query.username
-  const password=req.query.password
-  const user = checkCredentials(username as string, password as string)
-  if (user) {
-    res.status(200).send({user:user.username,token:'xd'})
+    case 'DELETE':
+      const orderId = parseInt(order_id as string, 10);
+      orders = orders.filter(order => order.id !== orderId);
+      return res.status(200).json({ message: 'Orden eliminada exitosamente', orders });
 
-  }else{
-    res.status(500).send({response:'usuario o clave incorrectas'})
+    default:
+      res.setHeader('Allow', ['GET', 'DELETE']);
+      res.status(405).json({ error: `Método ${method} no permitido` });
   }
-};
-
-
-function checkCredentials(username: string|undefined, password: string|undefined):User | null {
-  // Buscar el usuario por el nombre de usuario
-  const user = users.find((user:User) => user.username === username);
-
-  // Si no se encuentra el usuario, devolver falso
-  if (!user) {
-    return null;
-  }
-  if (user.password === password) {
-    return user
-  }
-
-  // Verificar la contraseña
-  return null ;
 }
