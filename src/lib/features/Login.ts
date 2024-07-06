@@ -10,6 +10,12 @@ function setLocalStorageItem(key: string, value: object) {
     localStorage.setItem(key, JSON.stringify(value));
   }
 }
+function removeLocalStorageItem(key: string) {
+  if (typeof window !== "undefined") {
+    localStorage.removeItem(key);
+    
+  }
+}
 
 function getLocalStorageItem(key: string) {
   if (typeof window !== "undefined") {
@@ -32,6 +38,11 @@ export const AuthSlide = createAppSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: (create) => ({
+    logOut: create.reducer((state) => {
+      removeLocalStorageItem('user')
+      state.user=null
+      state.status=null
+    }),
     login: create.asyncThunk(
       async (query: User, dispatch) => {
         const searchParams = new URLSearchParams();
@@ -65,6 +76,6 @@ export const AuthSlide = createAppSlice({
 });
 
 // Action creators are generated for each case reducer function.
-export const { login } = AuthSlide.actions;
+export const { login ,logOut} = AuthSlide.actions;
 
 // Selectors returned by `slice.selectors` take the root state as their first argument.

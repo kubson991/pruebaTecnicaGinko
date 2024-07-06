@@ -1,14 +1,14 @@
 import { withAuth } from "@/components/Authenticator";
+import Layout from "@/components/Layout";
 import { deleteOrder, getOrders } from "@/lib/features/Orders";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import styles from "@/styles/table.module.scss";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
-import { Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography,Stack } from "@mui/material";
+import { Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from "@mui/material";
 import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import Layout from "@/components/Layout";
 
 const Orders = () => {
   const router = useRouter();
@@ -143,8 +143,6 @@ async function removeElementByFetch() {
     async function fetchOrders() {
       if (user) {
         await dispatch(getOrders(user));
-      } else {
-        router.push("/login"); // Redirige al usuario a la página de login si no está autenticado
       }
     }
     fetchOrders();
@@ -168,6 +166,7 @@ async function removeElementByFetch() {
             <DataGrid
             sx={{maxHeight:'100%'}}
               disableColumnSelector
+              autoHeight
               getRowHeight={() => 55}
               rows={orders}
               columns={columns}
@@ -188,14 +187,12 @@ async function removeElementByFetch() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-        <Typography mt={2} variant="h4" component="h4" gutterBottom>Delete</Typography>
+        <DialogTitle id="alert-dialog-title" variant="h4" component="h4" gutterBottom>
+           Delete
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-        <Typography variant="h5" component="h4" textAlign="center" gutterBottom>
+          <DialogContentText id="alert-dialog-description" variant="h5" component="h4" textAlign="center" gutterBottom>
             Are you sure of deleting this order?
-            </Typography>
           </DialogContentText>
         </DialogContent>
         <DialogActions>

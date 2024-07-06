@@ -9,7 +9,7 @@ export function withAuth(Component: any) {
     const isAuthenticated = !!user?.token
     useEffect(() => {
       if (!isAuthenticated) {
-        router.push('/login')
+        router.push('/')
       }
     })
 

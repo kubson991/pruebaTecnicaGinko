@@ -1,8 +1,18 @@
-import type { UserResponse } from "@/types/Login"
-import { Box, Button, Typography ,Avatar,Stack} from "@mui/material"
-
+import { logOut } from "@/lib/features/Login";
+import { useAppDispatch } from "@/lib/hooks";
+import type { UserResponse } from "@/types/Login";
+import { Avatar, Box, Button, Stack, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 
 export default function Header({user}:{user:UserResponse|null}) {
+  const dispatch=useAppDispatch()
+  const router = useRouter();
+  function handleLogOut() {
+    if (typeof window !== "undefined") {
+      dispatch(logOut())
+      router.push('/')
+    }
+  }
   return (
     <>
     <Box component="header" sx={
@@ -23,7 +33,7 @@ export default function Header({user}:{user:UserResponse|null}) {
         {user && <Typography variant="h4" sx={{color:'white'}}>{`${user?.user}`}</Typography> }
         </Stack>
         </Box>
-        <Button sx={{fontSize:"1.3rem"}}>Log Out</Button>
+        <Button sx={{fontSize:"1.3rem"}} onClick={handleLogOut}>Log Out</Button>
       </Box>
     </>
   )
