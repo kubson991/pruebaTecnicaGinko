@@ -1,0 +1,9 @@
+{
+    "users":[
+        { "userEmail": "1@papa.com", "password": "1" },
+        { "userEmail": "guest@papa.com", "password": "123" },
+        { "userEmail": "admin@papa.com", "password": "123" },
+        { "userEmail": "xd@papa.com", "password": "345" },
+        { "userEmail": "standAlotne@papa.com", "password": "345" }
+    ]
+}  
