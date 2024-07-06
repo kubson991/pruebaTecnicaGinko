@@ -7,6 +7,8 @@ interface User {
   password: string;
 }
 
+
+
 const users:User[]= data.users;
 
 export default async function handler(req:NextApiRequest, res:NextApiResponse) {

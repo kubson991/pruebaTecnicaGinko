@@ -1,17 +1,23 @@
 import { createAppSlice } from "@/lib/createAppSlice";
 import { UserResponse } from "@/types/Login";
 import type { Order } from "@/types/Orders";
-
+import Layout from "@/components/Layout";
 
  interface OrderSlide {
   orders:Order[],
   status:'rejected'|'accepted'|'pending'|null
+}
+ interface deleteOrderPayload {
+  user:UserResponse,
+  orderId:string
 }
 
 const initialState: OrderSlide = {
   orders:[],
   status:null
 };
+
+
 
 // If you are not using async thunks you can use the standalone `createSlice`.
 export const OrdersSlide = createAppSlice({
@@ -50,11 +56,40 @@ export const OrdersSlide = createAppSlice({
         },
       }
     ),
+    deleteOrder: create.asyncThunk(
+      async (payload:deleteOrderPayload,dispatch) => {
+        if (!payload.user) {
+          throw new Error('Orders Error')
+        }
+        const searchParams=new URLSearchParams()
+        searchParams.append('token', String(payload.user.token));
+        searchParams.append('order_id', String(payload.orderId));
+        
+        const response = await fetch('/api/orders?'+searchParams,{method:'DELETE'})
+        if (!response.ok) {
+           throw new Error('Orders Error')
+        }
+        const parsedResponse=await response.json()
+        return parsedResponse;
+          
+      },
+      {
+        pending: (state) => {
+          state.status = 'pending';
+        },
+        fulfilled: (state, action) => {
+          state.orders = action.payload.orders
+          state.status = 'accepted';
+        },
+        rejected: (state) => {
+          state.orders = [];
+          state.status = 'rejected';
+        },
+      }
+    ),
   }),
-  // You can define your selectors here. These selectors receive the slice
-  // state as their first argument.
 });
 
 // Action creators are generated for each case reducer function.
-export const { getOrders } =
+export const { getOrders,deleteOrder } =
 OrdersSlide.actions;

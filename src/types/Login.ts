@@ -4,6 +4,6 @@ export interface User {
 }
 
 export interface UserResponse{
-    userName: string,
+    user: string,
     token:string
 }
