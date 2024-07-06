@@ -34,8 +34,7 @@ useEffect(() => {
         userName,
         password
       };
-      const response=await dispatch(login(bodyData))
-      console.log(response)
+     await dispatch(login(bodyData))
     }
   }
 

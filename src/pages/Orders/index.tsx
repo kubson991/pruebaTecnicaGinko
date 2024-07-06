@@ -1,65 +1,84 @@
-import { Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
-import Head from "next/head"
+import { getOrders } from "@/lib/features/Orders";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import {
+    Container
+} from "@mui/material";
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import Head from "next/head";
+import { useEffect } from "react";
 
-export async function getServerSideProps() {
-    // Puedes realizar cualquier lógica asíncrona aquí, como obtener datos de una API
-    const data = await fetch('');
-    const jsonData = await data.json();
-  
-    // Devuelve los datos como props, que se pasarán al componente de la página
-    return {
-      props: {
-        data: jsonData,
-      },
-    };
-  }
+export default function Orders() {
+  const dispatch = useAppDispatch();
+  const statusOrders = useAppSelector((state) => state.Orders.status);
+  const orders = useAppSelector((state) => state.Orders.orders);
+  const user = useAppSelector((state) => state.AuthUser.user);
 
-export default function Orders({data}) {
-    const rows:any=[]
-    return(
-        
+
+  const columns: GridColDef[] = [
+    { field: 'id', headerName: 'Id',sortable: false, width: 70,flex:0.5 ,filterable: false,disableColumnMenu: true},
+    { field: 'date', headerName: 'Date',type:'date',sortable: true,flex:1},
+    { field: 'name', headerName: 'Name',sortable: true, flex:1},
+    {
+      field: 'shipTo',
+      headerName: 'Ship to',
+      sortable: true,flex:1,filterable: false,disableColumnMenu: true
+    },
+    {
+      field: 'paymentMethod',
+      headerName: 'Payment method',
+      sortable: false,flex:1,filterable: false,disableColumnMenu: true
+    },
+    {
+      field: 'saleAmount',
+      headerName: 'Amount',
+      sortable: false,flex:1,filterable: false,disableColumnMenu: true
+    },
+  ];
+  useEffect(() => {
+    async function fetchOrders() {
+        if (user) {
+          await dispatch(getOrders(user));
+        }
+      }
+    fetchOrders();
+  },[]);
+
+  useEffect(() => {
+    if (statusOrders === "accepted") {
+    } else if (statusOrders === "rejected") {
+    }
+  }, [statusOrders]);
+
+  return (
     <>
-        <Head>
+      <Head>
         <title>Orders</title>
         <meta name="description" content="Orders Table" />
       </Head>
       <Container
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        {orders && (
+            <Container component="section" sx={{height:'70%'}}>
+      <DataGrid
+      
+      rows={orders}
+      columns={columns}
+      initialState={{
+        pagination: {
+          paginationModel: { page: 0, pageSize: 5 },
+        },
       }}
-    >
-            <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-        </Container>
-    </>)
+      pageSizeOptions={[5, 10]}
+    />
+    </Container>
+        )}
+      </Container>
+    </>
+  );
 }

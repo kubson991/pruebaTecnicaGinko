@@ -1,33 +1,39 @@
 import { createAppSlice } from "@/lib/createAppSlice";
-import type { User,UserResponse } from "@/types/Login";
- interface Login {
-  user:UserResponse|null,
-  status:'rejected'|'accepted'|'pending'|null,
+import { UserResponse } from "@/types/Login";
+import type { Order } from "@/types/Orders";
+
+
+ interface OrderSlide {
+  orders:Order[],
+  status:'rejected'|'accepted'|'pending'|null
 }
 
-const initialState: Login = {
-  user:null,
+const initialState: OrderSlide = {
+  orders:[],
   status:null
 };
 
 // If you are not using async thunks you can use the standalone `createSlice`.
-export const AuthSlide = createAppSlice({
-  name: "AuthUser",
+export const OrdersSlide = createAppSlice({
+  name: "Orders",
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: (create) => ({
-    login: create.asyncThunk(
-      async (query: User,dispatch) => {
-        const searchParams=new URLSearchParams()
-        searchParams.append('username', query.userName);
-        searchParams.append('password', query.password);
-        
-        const response = await fetch('/api/users?'+searchParams)
-        if (!response.ok) {
-           throw new Error('Login Error')
+    getOrders: create.asyncThunk(
+      async (user:UserResponse,dispatch) => {
+        if (!user) {
+          throw new Error('Orders Error')
         }
-        return await response.json();
+        const searchParams=new URLSearchParams()
+        searchParams.append('token', String(user.token));
+        
+        const response = await fetch('/api/orders?'+searchParams)
+        if (!response.ok) {
+           throw new Error('Orders Error')
+        }
+        const parsedResponse=await response.json()
+        return parsedResponse;
           
       },
       {
@@ -35,11 +41,11 @@ export const AuthSlide = createAppSlice({
           state.status = 'pending';
         },
         fulfilled: (state, action) => {
-          state.user = action.payload
+          state.orders = action.payload.orders
           state.status = 'accepted';
         },
         rejected: (state) => {
-          state.user = null;
+          state.orders = [];
           state.status = 'rejected';
         },
       }
@@ -50,7 +56,5 @@ export const AuthSlide = createAppSlice({
 });
 
 // Action creators are generated for each case reducer function.
-export const { login } =
-AuthSlide.actions;
-
-// Selectors returned by `slice.selectors` take the root state as their first argument.
+export const { getOrders } =
+OrdersSlide.actions;
