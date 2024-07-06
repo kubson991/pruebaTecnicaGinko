@@ -112,10 +112,20 @@ export default function Home() {
             >
               Sign In
             </Button>
+            <Typography
+            sx={{color:'grey'}}
+              mt={4}
+              variant="caption"
+              component="h3"
+              textAlign="center"
+              gutterBottom
+            >
+              CopyRight © Your Website 2024
+            </Typography>
           </Stack>
         </form>
       </Container>
-      <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
         <Alert
           severity="error"
           variant="filled"
