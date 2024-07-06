@@ -2,7 +2,8 @@ import { useAppSelector } from '@/lib/hooks'
 import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-export function withAuth(Component: any) {
+import type { ComponentType } from 'react'
+export function withAuth(Component: ComponentType<AppProps>) {
   return function AuthenticatedComponent(props: AppProps) {
     const router = useRouter()
     const user = useAppSelector((state) => state.AuthUser.user)
