@@ -1,0 +1,21 @@
+.OrdersView{
+    .tableHeader{
+        font-size: 1.6rem;
+        font-weight: bolder;
+        background-color: purple;
+        color: white;
+        svg{
+            fill: white;
+            width: 1.3em;
+            height: 1.3em;
+        }
+        }
+        
+        .tableCell{
+            font-size: 1.3rem;
+            font-weight: 200;
+        }
+        .dialog{
+            font-size: 2rem;
+        }
+}
