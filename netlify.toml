@@ -1,5 +1,3 @@
 [[plugins]]
 package = "@netlify/plugin-nextjs"
 
-[[redirects]]
-/* /index.html 200
