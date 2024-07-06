@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import styles from "@/styles/table.module.scss";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import { Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from "@mui/material";
-import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridActionsCellItem, GridColDef, GridRowParams } from "@mui/x-data-grid";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
@@ -109,7 +109,7 @@ const Orders = () => {
             sx={{
               color: "primary.main",
             }}
-            onClick={() => handleRemoveElement(data as object)}
+            onClick={() => handleRemoveElement(data)}
           />,
         ];
       },
@@ -135,8 +135,8 @@ const Orders = () => {
     setDialogOpen(false)
     setRowIdActive('')
   }
-  async function handleRemoveElement(data: any) {
-    setRowIdActive(data.id)
+  async function handleRemoveElement(data:GridRowParams<any>) {
+    setRowIdActive(String(data.id))
     setDialogOpen(true)
   }
   async function removeElementByFetch() {
@@ -146,9 +146,6 @@ const Orders = () => {
   setDialogOpen(false)
   setRowIdActive('')
   }
-
-
-
 
   return (
     <>
