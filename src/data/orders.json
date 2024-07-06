@@ -1,0 +1,100 @@
+{
+"orders":[
+    {
+      "id": 1,
+      "date": "2024-07-10",
+      "name": "John Doe",
+      "shipTo": "123 Main St, Anytown, USA",
+      "paymentMethod": "Credit Card",
+      "saleAmount": "$150.00"
+    },
+    {
+      "id": 2,
+      "date": "2024-07-09",
+      "name": "Jane Smith",
+      "shipTo": "456 Oak Ave, Othertown, USA",
+      "paymentMethod": "PayPal",
+      "saleAmount": "$99.99"
+    },
+    {
+      "id": 3,
+      "date": "2024-07-08",
+      "name": "Bob Johnson",
+      "shipTo": "789 Elm St, Anycity, USA",
+      "paymentMethod": "Debit Card",
+      "saleAmount": "$200.50"
+    },
+    {
+      "id": 4,
+      "date": "2024-07-07",
+      "name": "Emily Brown",
+      "shipTo": "567 Pine Ave, Somewhere, USA",
+      "paymentMethod": "Cash",
+      "saleAmount": "$75.25"
+    },
+    {
+      "id": 5,
+      "date": "2024-07-06",
+      "name": "Michael Johnson",
+      "shipTo": "890 Cedar St, Anywhere, USA",
+      "paymentMethod": "Credit Card",
+      "saleAmount": "$300.00"
+    },
+    {
+      "id": 6,
+      "date": "2024-07-05",
+      "name": "Sarah Davis",
+      "shipTo": "345 Birch Rd, Elsewhere, USA",
+      "paymentMethod": "PayPal",
+      "saleAmount": "$125.50"
+    },
+    {
+      "id": 7,
+      "date": "2024-07-04",
+      "name": "Chris Lee",
+      "shipTo": "901 Maple Ave, Nowhere, USA",
+      "paymentMethod": "Debit Card",
+      "saleAmount": "$175.75"
+    },
+    {
+      "id": 8,
+      "date": "2024-07-03",
+      "name": "Emma Wilson",
+      "shipTo": "234 Oak St, Everywhere, USA",
+      "paymentMethod": "Cash",
+      "saleAmount": "$50.00"
+    },
+    {
+      "id": 9,
+      "date": "2024-07-02",
+      "name": "Daniel Taylor",
+      "shipTo": "678 Elm Ave, Anyplace, USA",
+      "paymentMethod": "Credit Card",
+      "saleAmount": "$225.30"
+    },
+    {
+      "id": 10,
+      "date": "2024-07-01",
+      "name": "Olivia Martinez",
+      "shipTo": "123 Pine Rd, Somewheretown, USA",
+      "paymentMethod": "PayPal",
+      "saleAmount": "$180.20"
+    },
+    {
+      "id": 11,
+      "date": "2024-06-30",
+      "name": "James Garcia",
+      "shipTo": "456 Cedar Ave, Otherplace, USA",
+      "paymentMethod": "Debit Card",
+      "saleAmount": "$95.99"
+    },
+    {
+      "id": 12,
+      "date": "2024-06-29",
+      "name": "Ava Rodriguez",
+      "shipTo": "789 Birch Rd, Anotherplace, USA",
+      "paymentMethod": "Cash",
+      "saleAmount": "$120.75"
+    }
+  ]
+}  
