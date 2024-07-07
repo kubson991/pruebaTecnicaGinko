@@ -24,6 +24,7 @@ const Orders = () => {
       headerAlign: "center",
       headerClassName: styles.tableHeader,
       cellClassName: styles.tableCell,
+      minWidth: 80,
     },
     {
       field: "date",
@@ -31,6 +32,7 @@ const Orders = () => {
       type: "date",
       sortable: true,
       flex: 1,
+      minWidth: 150,
       valueFormatter: (params) => {
         const date = new Date(params);
         return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
@@ -40,6 +42,7 @@ const Orders = () => {
       headerAlign: "center",
       headerClassName: styles.tableHeader,
       cellClassName: styles.tableCell,
+      
     },
     {
       field: "name",
@@ -51,6 +54,7 @@ const Orders = () => {
       headerAlign: "center",
       headerClassName: styles.tableHeader,
       cellClassName: styles.tableCell,
+      minWidth: 150,
     },
     {
       field: "shipTo",
@@ -64,6 +68,7 @@ const Orders = () => {
       headerAlign: "center",
       headerClassName: styles.tableHeader,
       cellClassName: styles.tableCell,
+      minWidth: 150,
     },
     {
       field: "paymentMethod",
@@ -77,6 +82,7 @@ const Orders = () => {
       headerAlign: "center",
       headerClassName: styles.tableHeader,
       cellClassName: styles.tableCell,
+      minWidth: 150,
     },
     {
       field: "saleAmount",
@@ -90,11 +96,12 @@ const Orders = () => {
       headerAlign: "center",
       headerClassName: styles.tableHeader,
       cellClassName: styles.tableCell,
+      minWidth: 150,
     },
     {
       field: "actions",
       type: "actions",
-
+      minWidth: 80,
       width: 100,
       align: "center",
       headerAlign: "center",

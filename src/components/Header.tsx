@@ -33,7 +33,7 @@ export default function Header({user}:{user:UserResponse|null}) {
         {user && <Typography variant="h4" sx={{color:'white'}}>{`${user?.user}`}</Typography> }
         </Stack>
         </Box>
-        <Button sx={{fontSize:"1.3rem"}} onClick={handleLogOut}>Log Out</Button>
+        <Button sx={{fontSize:"1.3rem",color:"white",fontWeight:"bolder"}} onClick={handleLogOut}>Log Out</Button>
       </Box>
     </>
   )
