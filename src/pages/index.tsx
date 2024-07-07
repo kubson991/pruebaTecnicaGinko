@@ -25,7 +25,7 @@ export default function Home() {
 
   useEffect(() => {
     if (statusLogin === "accepted") {
-      router.push("/orders");
+      router.push("/Orders");
     } else if (statusLogin === "rejected") {
       setOpen(true);
     }
