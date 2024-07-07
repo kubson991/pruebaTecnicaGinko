@@ -25,6 +25,9 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(logOut())
+  }, [])
+  
+  useEffect(() => {
     if (statusLogin === "accepted") {
       router.push("/Orders");
     } else if (statusLogin === "rejected") {

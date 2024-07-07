@@ -18,6 +18,8 @@ Orders page is not a SSR because the webApp don't have implemented cookies or an
 
 All interfaces used in the app are located in types folder ```src/types```.
 
+For standart the order in components is first variables second hooks and third functions
+
 Because the proyect is so small and we dont have a design System we dont use the ```theme``` api to create a custom theme for our MUI components instead we use the propertie ```sx``` of the MUI components and modify the stlyes inside them ,But I highly recommend migrating the majority of the styles to a custom MUI theme and making better use of SCSS modules if the proyect keep growing. However, for this demo, it wasn't necessary.
 
 ## Store
