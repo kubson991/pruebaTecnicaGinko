@@ -1,4 +1,4 @@
-import { login ,logOut} from "@/lib/features/Login";
+import { login, logOut } from "@/lib/features/Login";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import styles from "@/styles/login.module.scss";
 import type { User } from "@/types/Login";
@@ -134,7 +134,7 @@ export default function Home() {
         <Alert
           severity="error"
           variant="filled"
-          sx={{ width: "100%",fontSize:'1.5rem' }}
+          sx={{ width: "100%",fontSize:'1.5rem',backgroundColor:'red' }}
         >
           Ha ocurrido un problema al intentar loggearte , trata otra vez
         </Alert>
