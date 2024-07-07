@@ -1,4 +1,4 @@
-import { login } from "@/lib/features/Login";
+import { login ,logOut} from "@/lib/features/Login";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import styles from "@/styles/login.module.scss";
 import type { User } from "@/types/Login";
@@ -24,8 +24,9 @@ export default function Home() {
   const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
+    dispatch(logOut())
     if (statusLogin === "accepted") {
-      router.push("/orders");
+      router.push("/Orders");
     } else if (statusLogin === "rejected") {
       setOpen(true);
     }
