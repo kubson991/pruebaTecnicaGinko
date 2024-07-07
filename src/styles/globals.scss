@@ -7,3 +7,37 @@
 html{
   font-size: 62.5%;
 }
+
+.MuiDataGrid-filterForm {
+  label{
+    font-size:1.6rem;
+  }
+  input{
+    font-size: 1.3rem;
+  }
+
+}
+
+.MuiList-root {
+  font-size: 1.3rem;
+  ul,li{
+    font-size: 1.3rem;
+
+  }
+}
+
+.MuiSelect-select{
+  font-size: 1.3rem;
+}
+.MuiDataGrid-menu {
+  li{
+    svg{
+      width: 1.4em;
+      height: 1.4em;
+    }
+    span{
+      font-size: 1.5rem;
+
+    }
+  }
+}
